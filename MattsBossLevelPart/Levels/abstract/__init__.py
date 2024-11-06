@@ -1,3 +1,2 @@
 from .holiday_level import HolidayLevel
-
-__all__ = ['BossLevel']
+from .setting import Setting
