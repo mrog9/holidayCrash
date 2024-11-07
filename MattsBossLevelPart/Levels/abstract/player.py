@@ -7,7 +7,7 @@ class Player(ABC):
         pass
 
     @abstractmethod
-    def setPosition():
+    def updatePosition():
         pass
 
     @abstractmethod
