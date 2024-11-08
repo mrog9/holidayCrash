@@ -10,7 +10,7 @@ player = Halloween().createPlayer()
 boss = Halloween().createBoss()
 
 key_start = None
-duration = 0
+move = False
 right = True
 
 while running:
@@ -21,21 +21,19 @@ while running:
             if event.key == pygame.K_ESCAPE: 
                 running = False
             elif event.key == pygame.K_RIGHT:
-                key_start = datetime.now()
+                move = True
                 right = True
             elif event.key == pygame.K_LEFT:
                 right = False
-                key_start = datetime.now()
+                move = True
         elif event.type == pygame.KEYUP:
             if event.key == pygame.K_RIGHT or event.key == pygame.K_LEFT:
-                if key_start != None:
-                    duration = (datetime.now() - key_start).total_seconds()
-                    key_start = None
+                move = False
 
         
     setting
-    player.updatePosition(duration, right)
-    duration = 0
+
+    player.updatePosition(move, right)
     player.drawPlayer(setting)
     
     boss.drawBoss(setting)

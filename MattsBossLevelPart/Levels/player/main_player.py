@@ -11,20 +11,28 @@ class MainPlayer(Player):
         self.vel = 0
         self.surface = pygame.Surface((100,100))
         self.surface.fill((0,0,0))
+        self.float_x = 50.0
         
     def getPosition(self):
 
         pass
 
-    def updatePosition(self, duration, right):
+    def updatePosition(self, move, right):
 
-        if right:
-            self.vel += math.ceil(duration)*10
+        if move:
+           
+            if right and self.pos_x < 650:
+                self.vel = 0.2
+            elif not right and self.pos_x > 50:
+                self.vel = -0.2
+
+            self.float_x += self.vel
+            self.pos_x = math.floor(self.float_x)
+
         else:
-            self.vel -= math.ceil(duration)*10
 
-        self.pos_x += self.vel
-        self.vel = 0
+            self.float_x = float(self.pos_x)
+            self.vel = 0
         
 
     def drawPlayer(self, setting):
