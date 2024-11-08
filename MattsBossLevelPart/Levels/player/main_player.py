@@ -15,7 +15,11 @@ class MainPlayer(Player):
         
     def getPosition(self):
 
-        pass
+        quad = self.pos_x // 150
+
+        return quad
+
+        
 
     def updatePosition(self, move, right):
 
@@ -28,6 +32,7 @@ class MainPlayer(Player):
 
             self.float_x += self.vel
             self.pos_x = math.floor(self.float_x)
+            self.vel=0
 
         else:
 
