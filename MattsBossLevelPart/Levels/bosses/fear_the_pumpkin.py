@@ -9,7 +9,7 @@ class FearThePumpkin(Boss):
 
         self.position = (700,399)
         self.boss_surface = pygame.Surface((100,100))
-        self.all_attacks = pygame.sprite.Group()
+        self.all_attacks = []
 
 
     def getPosition(self):
@@ -22,10 +22,7 @@ class FearThePumpkin(Boss):
 
     def drawBoss(self, setting, attack):
 
-        if len(self.all_attacks)>0:
-
-            self.all_attacks.update(setting)
-
+        
         pygame.draw.circle(self.boss_surface, (255,255,255), (50,75), 25)
         setting.blit(self.boss_surface, self.position)
 
@@ -33,6 +30,16 @@ class FearThePumpkin(Boss):
 
             ba = BossAttacks()
             ba.initializeAttack(setting, 1)
-            self.all_attacks.add(ba)
+            self.all_attacks.append(ba)
+
+    def getBossAttacks(self):
+
+        return self.all_attacks
+    
+    def clearAttackList(self):
+
+        self.all_attacks = []
+
+
 
     

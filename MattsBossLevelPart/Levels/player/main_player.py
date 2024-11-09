@@ -9,15 +9,15 @@ class MainPlayer(Player):
         self.pos_x = 50
         self.pos_y = 474
         self.vel = 0
-        self.surface = pygame.Surface((100,100))
+        self.surface = pygame.Surface((60,60))
         self.surface.fill((0,0,0))
         self.float_x = 50.0
         
     def getPosition(self):
 
-        quad = self.pos_x // 150
+        pos = (self.pos_x, self.pos_y)
 
-        return quad
+        return pos
 
         
 
@@ -42,8 +42,8 @@ class MainPlayer(Player):
 
     def drawPlayer(self, setting):
 
-        pygame.draw.circle(self.surface, (255,255,255), (50,75), 25)
-        setting.blit(self.surface, (self.pos_x - 50, self.pos_y  - 75))
+        pygame.draw.circle(self.surface, (255,255,255), (26,35), 25)
+        setting.blit(self.surface, (self.pos_x - 26, self.pos_y  - 35))
 
     
          

@@ -7,7 +7,8 @@ class BossAttacks(pygame.sprite.Sprite):
     def __init__(self):
         super().__init__()
 
-        self.surface = pygame.Surface((50, 100))
+        self.surface = pygame.Surface((15, 100), pygame.SRCALPHA)
+        self.surface.fill((0,0,0))
         self.pos = (0,0)
         self.x = 650
         self.floatX = 650.0
@@ -19,7 +20,7 @@ class BossAttacks(pygame.sprite.Sprite):
 
     def initializeAttack(self,setting, pred_quad):
 
-        pos_x = 44
+        pos_x = 7
         
         rand_num = random.randint(0,19)
 
@@ -42,3 +43,13 @@ class BossAttacks(pygame.sprite.Sprite):
 
         pygame.draw.circle(self.surface, (255,255,255), self.pos, 5)
         setting.blit(self.surface, (self.x, self.y))
+
+    def endAttack(self, setting):
+
+        pygame.draw.circle(self.surface, (0,0,0), self.pos, 5)
+        setting.blit(self.surface, (self.x, self.y))
+
+
+    def getAttackPosition(self):
+
+        return self.x, self.y

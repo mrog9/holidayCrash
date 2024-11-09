@@ -3,12 +3,16 @@ import sys
 from holidays.halloween import Halloween
 import random
 from datetime import datetime
+from all_attacks import AllAttacks
 
 running = True
 
-setting = Halloween().createSetting()
-player = Halloween().createPlayer()
-boss = Halloween().createBoss()
+h_obj = Halloween()
+b_attacks = AllAttacks()
+
+setting =h_obj.createSetting()
+player = h_obj.createPlayer()
+boss = h_obj.createBoss()
 
 key_start = None
 move = False
@@ -48,16 +52,24 @@ while running:
             if event.key == pygame.K_RIGHT or event.key == pygame.K_LEFT:
                 move = False
 
-        
     setting
+      
 
-    player.updatePosition(move, right)
-    player.drawPlayer(setting)
+    
     boss.drawBoss(setting, attack)
+    player.updatePosition(move, right)
+    player_pos = player.getPosition()
+    b_attacks.updateAll(setting, boss, player_pos)
+    player.drawPlayer(setting)
+    
+    
+    
     attack = False
     
     if start_time != None:
         duration = (datetime.now() - start_time).total_seconds()
+
+    setting = h_obj.createSetting()
         
     pygame.display.flip()
 

@@ -5,6 +5,10 @@ from bosses.fear_the_pumpkin import FearThePumpkin
 
 class Halloween(HolidayLevel):
 
+    def __init__(self):
+
+        self.pp_obj = PumpkinPatch()
+
     def createBoss(self):
         boss_obj = FearThePumpkin()
 
@@ -16,9 +20,8 @@ class Halloween(HolidayLevel):
         return player_obj
 
     def createSetting(self):
-         pp = PumpkinPatch()
 
-         halloweenSetting = pp.getSetting()
+         halloweenSetting = self.pp_obj.getSetting()
 
          return halloweenSetting
          
