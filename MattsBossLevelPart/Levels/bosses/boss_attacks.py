@@ -28,7 +28,7 @@ class BossAttacks(pygame.sprite.Sprite):
 
         self.pos = (pos_x, pos_y)
 
-        pygame.draw.circle(self.surface, (255,255,255), self.pos, 5)
+        pygame.draw.circle(self.surface, (255,165,0), self.pos, 5)
         setting.blit(self.surface, (self.x, self.y))
 
     def update(self,setting):
@@ -41,7 +41,7 @@ class BossAttacks(pygame.sprite.Sprite):
 
         self.velY += self.accel
 
-        pygame.draw.circle(self.surface, (255,255,255), self.pos, 5)
+        pygame.draw.circle(self.surface, (255,165,0), self.pos, 5)
         setting.blit(self.surface, (self.x, self.y))
 
     def endAttack(self, setting):
