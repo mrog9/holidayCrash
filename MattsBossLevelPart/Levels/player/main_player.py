@@ -1,4 +1,5 @@
 from abstract.player import Player
+from .player_attacks import PlayerAttacks
 import pygame
 import math
 
@@ -6,16 +7,18 @@ class MainPlayer(Player):
 
     def __init__(self):
 
-        self.pos_x = 50
-        self.pos_y = 474
+        self.pos_x = 24
+        self.pos_y = 440
         self.vel = 0
-        self.surface = pygame.Surface((100,100))
+        self.surface = pygame.Surface((80,70))
         self.surface.fill((0,0,0))
         self.float_x = 50.0
         self.p_surface = pygame.Surface((250, 30))
-        self.p_surface.fill((0,0,0))
+        self.p_surface.fill((200,200,200))
         self.image = pygame.image.load("MattsBossLevelPart/Levels/player/owl.png")
         self.scaled_img = pygame.transform.scale(self.image, (60,60))
+        self.damage = 0
+        self.all_attacks=[]
         
     def getPosition(self):
 
@@ -44,12 +47,37 @@ class MainPlayer(Player):
             self.vel = 0
         
 
-    def drawPlayer(self, setting):
+    def drawPlayer(self, setting, attack, power):
 
         self.surface.blit(self.scaled_img, (10,1))
-        setting.blit(self.surface, (self.pos_x - 26, self.pos_y  - 35))
-        pygame.draw.rect(self.p_surface, (200,200,200), (0,0,250,30))
+        setting.blit(self.surface, (self.pos_x, self.pos_y))
         setting.blit(self.p_surface, (25,25))
+        damage = pygame.Surface((self.damage, 30))
+        damage.fill((0,0,0))
+        setting.blit(damage,(275 - self.damage, 25))
 
+        if attack:
+
+            pa = PlayerAttacks()
+            pa.initializeAttack(setting, power)
+            self.all_attacks.append(pa)        
+
+    def reduceHealth(self):
+
+        self.damage += 50
+
+        if self.damage < 250:
+
+            return True
+        
+        else:
+
+            return False
+        
+    def getPlayerAttacks(self):
+
+        return self.all_attacks
     
-         
+    def clearAttackList(self):
+
+        self.all_attacks = []

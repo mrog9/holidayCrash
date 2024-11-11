@@ -19,8 +19,13 @@ move = False
 right = True
 start_time = None
 duration = 0
-attack = False
+p_power = 0.0
+b_attack = False
+b_IS_alive = True
 boss_upload_time = float(random.randint(2,5))
+p_IS_alive = True
+p_start = None
+p_attack = False
 
 while running:
 
@@ -30,7 +35,7 @@ while running:
 
     if duration > boss_upload_time:
 
-        attack = True
+        b_attack = True
         duration = 0.0
         start_time = None
         boss_upload_time = float(random.randint(2,5))
@@ -48,23 +53,33 @@ while running:
             elif event.key == pygame.K_LEFT:
                 right = False
                 move = True
+            elif event.key == pygame.K_UP:
+                p_power += .001
         elif event.type == pygame.KEYUP:
             if event.key == pygame.K_RIGHT or event.key == pygame.K_LEFT:
                 move = False
+            elif event.key == pygame.K_UP:
+                p_attack = True
 
     setting
       
 
     
-    boss.drawBoss(setting, attack)
+    boss.drawBoss(setting, b_attack)
     player.updatePosition(move, right)
-    player_pos = player.getPosition()
-    b_attacks.updateAll(setting, boss, player_pos)
-    player.drawPlayer(setting)
+    p_IS_alive, b_IS_alive = b_attacks.updateAll(setting, boss, player)
+    player.drawPlayer(setting, p_attack, p_power)
+
+    if p_attack:
+        p_attack = False
+        power = 0
+
+    if not p_IS_alive or not b_IS_alive:
+
+        running = False
     
     
-    
-    attack = False
+    b_attack = False
     
     if start_time != None:
         duration = (datetime.now() - start_time).total_seconds()
@@ -72,6 +87,42 @@ while running:
     setting = h_obj.createSetting()
         
     pygame.display.flip()
+
+running = True
+
+while running:
+
+    if b_IS_alive:
+        pygame.font.init()
+        font = pygame.font.Font(None, 36)
+        setting.fill((0,0,0))
+        text1 = "YOU HAVE BEEN DEFEATED!"
+        text2 = "Press ESC to go to leaderboard"
+        text_surf1 = font.render(text1, True, (255,165,0))
+        text_surf2 = font.render(text2, True, (255,165,0))
+        setting.blit(text_surf1, (200,200))
+        setting.blit(text_surf2, (200,300))
+    else:
+        pygame.font.init()
+        font = pygame.font.Font(None, 36)
+        setting.fill((0,0,0))
+        text1 = "YOU HAVE WON!!!!"
+        text2 = "Press ESC to go to next level"
+        text_surf1 = font.render(text1, True, (255,165,0))
+        text_surf2 = font.render(text2, True, (255,165,0))
+        setting.blit(text_surf1, (200,200))
+        setting.blit(text_surf2, (200,300))
+
+    for event in pygame.event.get():
+
+        if event.type == pygame.QUIT:
+            running = False
+        elif event.type == pygame.KEYDOWN:
+            if event.key == pygame.K_ESCAPE: 
+                running = False
+
+    pygame.display.flip()
+
 
 pygame.quit()
 sys.exit()

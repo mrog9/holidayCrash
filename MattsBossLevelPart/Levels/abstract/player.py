@@ -13,3 +13,7 @@ class Player(ABC):
     @abstractmethod
     def drawPlayer():
         pass
+
+    @abstractmethod
+    def reduceHealth():
+        pass

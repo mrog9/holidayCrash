@@ -1,38 +1,72 @@
 from bosses.fear_the_pumpkin import FearThePumpkin
 from bosses.boss_attacks import BossAttacks
+from player.main_player import MainPlayer
 import pygame
 
 class AllAttacks:
 
     def __init__(self):
           
-        self.sprite_group = pygame.sprite.Group()
-        self.sprite_list= []
+        self.boss_sprite_group = pygame.sprite.Group()
+        self.boss_sprite_list= []
+        self.player_sprite_group = pygame.sprite.Group()
+        self.player_sprite_list = []
 
-    def updateAll(self, setting, boss, player_pos):
+    def updateAll(self, setting, boss, player):
 
-        self.sprite_list = boss.getBossAttacks()
+        self.boss_sprite_list = boss.getBossAttacks()
+        self.player_sprite_list = player.getPlayerAttacks()
 
-        self.sprite_group.add(*self.sprite_list)
+        self.boss_sprite_group.add(*self.boss_sprite_list)
+        self.player_sprite_group.add(*self.player_sprite_list)
 
         boss.clearAttackList()
-        # self.sprite_set = set()
+        player.clearAttackList()
 
-        if len(self.sprite_group)> 0:
+        p_IS_alive = True
+        b_IS_alive = True
 
-            (px,py) = player_pos
+        if len(self.boss_sprite_group)> 0:
 
-            for sprite in self.sprite_group:
+            (px,py) = player.getPosition()
+            
+
+            for sprite in self.boss_sprite_group:
 
                 x,y = sprite.getAttackPosition()
 
                 if (x <= px+40) and (x>=px+25):
 
-                    if y >= 400:
+                    if y >= 410:
 
                         sprite.endAttack(setting)
-                        self.sprite_group.remove(sprite)
+                        self.boss_sprite_group.remove(sprite)
                         del sprite
 
+                        p_IS_alive = player.reduceHealth()
+
+        if len(self.player_sprite_group)> 0:
+
+            (bx,by) = boss.getPosition()
             
-            self.sprite_group.update(setting)
+
+            for sprite in self.player_sprite_group:
+
+                x,y = sprite.getAttackPosition()
+
+                if (x <= bx-25) and (x>=bx-40):
+
+                    if y >= 410:
+
+                        sprite.endAttack(setting)
+                        self.player_sprite_group.remove(sprite)
+                        del sprite
+
+                        b_IS_alive = boss.reduceHealth()
+
+
+            
+        self.boss_sprite_group.update(setting)
+        self.player_sprite_group.update(setting)
+
+        return p_IS_alive, b_IS_alive
