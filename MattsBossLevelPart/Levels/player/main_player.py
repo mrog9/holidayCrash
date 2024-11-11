@@ -59,7 +59,8 @@ class MainPlayer(Player):
         if attack:
 
             pa = PlayerAttacks()
-            pa.initializeAttack(setting, power)
+
+            pa.initializeAttack(setting, power, self.pos_x)
             self.all_attacks.append(pa)        
 
     def reduceHealth(self):

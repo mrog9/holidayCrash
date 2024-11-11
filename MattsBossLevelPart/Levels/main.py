@@ -26,6 +26,7 @@ boss_upload_time = float(random.randint(2,5))
 p_IS_alive = True
 p_start = None
 p_attack = False
+power_up = False
 
 while running:
 
@@ -54,12 +55,13 @@ while running:
                 right = False
                 move = True
             elif event.key == pygame.K_UP:
-                p_power += .001
+                power_up = True
         elif event.type == pygame.KEYUP:
             if event.key == pygame.K_RIGHT or event.key == pygame.K_LEFT:
                 move = False
             elif event.key == pygame.K_UP:
                 p_attack = True
+                power_up = False
 
     setting
       
@@ -70,9 +72,10 @@ while running:
     p_IS_alive, b_IS_alive = b_attacks.updateAll(setting, boss, player)
     player.drawPlayer(setting, p_attack, p_power)
 
-    if p_attack:
-        p_attack = False
-        power = 0
+    if power_up:
+        p_power += .0001
+    else:
+        p_power = 0
 
     if not p_IS_alive or not b_IS_alive:
 
@@ -80,6 +83,7 @@ while running:
     
     
     b_attack = False
+    p_attack = False
     
     if start_time != None:
         duration = (datetime.now() - start_time).total_seconds()
@@ -99,7 +103,7 @@ while running:
         text1 = "YOU HAVE BEEN DEFEATED!"
         text2 = "Press ESC to go to leaderboard"
         text_surf1 = font.render(text1, True, (255,165,0))
-        text_surf2 = font.render(text2, True, (255,165,0))
+        text_surf2 = font.render(text2, True, (200,0,0))
         setting.blit(text_surf1, (200,200))
         setting.blit(text_surf2, (200,300))
     else:
@@ -108,8 +112,8 @@ while running:
         setting.fill((0,0,0))
         text1 = "YOU HAVE WON!!!!"
         text2 = "Press ESC to go to next level"
-        text_surf1 = font.render(text1, True, (255,165,0))
-        text_surf2 = font.render(text2, True, (255,165,0))
+        text_surf1 = font.render(text1, True, (200,200,200))
+        text_surf2 = font.render(text2, True, (0,0,200))
         setting.blit(text_surf1, (200,200))
         setting.blit(text_surf2, (200,300))
 

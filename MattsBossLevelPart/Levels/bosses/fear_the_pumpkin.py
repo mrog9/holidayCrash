@@ -7,7 +7,7 @@ class FearThePumpkin(Boss):
 
     def __init__(self):
 
-        self.position = (700,399)
+        self.position = (675,399)
         self.boss_surface = pygame.Surface((100,100))
         self.all_attacks = []
         self.p_surface = pygame.Surface((250, 30))
