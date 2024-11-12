@@ -13,7 +13,7 @@ class FearThePumpkin(Boss):
         self.all_attacks = []
         self.p_surface = pygame.Surface((250, 30))
         self.p_surface.fill((255,165,0))
-        self.image = pygame.image.load("MattsBossLevelPart/Levels/bosses/pumpkin.png")
+        self.image = pygame.image.load("MattsBossLevelPart/Levels/bosses/halloweenBoss/pumpkin.png")
         self.scaled_img = pygame.transform.scale(self.image, (80,80))
         self.damage = 0
         self.nnModel =  PumpkinNN(20, 4)
@@ -42,8 +42,14 @@ class FearThePumpkin(Boss):
 
         if attack:
 
-            p_pos_tens = torch.stack(p_pos_list[0:21]).float()
-            true_pos = torch.tensor([p_pos_list[-1]])
+            red_pos = []
+
+            for i in range(0,1001,50):
+
+                red_pos.append(p_pos_list[i])
+
+            p_pos_tens = torch.stack(red_pos[0:21]).float()
+            true_pos = red_pos[-1]
             sec_num = (true_pos +50 )// 150
             true_sec_tens = torch.tensor([sec_num]) 
 

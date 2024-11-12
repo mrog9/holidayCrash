@@ -1,9 +1,9 @@
-from bosses.fear_the_pumpkin import FearThePumpkin
-from bosses.boss_attacks import BossAttacks
+from bosses.halloweenBoss.fear_the_pumpkin import FearThePumpkin
+from bosses.halloweenBoss.boss_attacks import BossAttacks
 from player.main_player import MainPlayer
 import pygame
 
-class AllAttacks:
+class HalloweenAttacks:
 
     def __init__(self):
           
