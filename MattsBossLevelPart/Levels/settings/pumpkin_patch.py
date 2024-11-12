@@ -10,6 +10,10 @@ class PumpkinPatch(Setting):
         self.surface = pygame.Surface((800,100))
         self.surface.fill((255,165,0))
 
+        pygame.init()
+        pygame.mixer.music.load('MattsBossLevelPart/Levels/settings/lofiMusic.mp3')
+        pygame.mixer.music.play(-1)
+
     def getSetting(self):
 
         self.screen.blit(self.surface, (0,500))

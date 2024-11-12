@@ -14,15 +14,14 @@ class BossAttacks(pygame.sprite.Sprite):
         self.floatX = 650.0
         self.y = 399
         self.floatY = 399.0
-        self.velX = -0.12
-        self.velY_list = [-0.25, -0.15, -0.05, -0.005]
+        self.velX = -0.13
+        self.velY_list = [-0.22, -0.16, -0.10, -0.05]
         self.velY = 0
         self.accel = 0.0001
 
-    def initializeAttack(self,setting, pred_quad):
+    def initializeAttack(self,setting, pred_sec):
         
-        rand_int = random.randint(0,3)
-        rand_list = [self.velY_list[rand_int] + 0.01*i for i in range(11)]
+        rand_list = [self.velY_list[pred_sec] + 0.01*i for i in range(11)]
         rand_int = random.randint(0,10)
         self.velY = rand_list[rand_int]
 

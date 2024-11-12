@@ -1,9 +1,11 @@
 import pygame
 import sys
 from holidays.halloween import Halloween
+from bosses.pumpkin_nn import PumpkinNN
 import random
 from datetime import datetime
 from all_attacks import AllAttacks
+import torch
 
 running = True
 
@@ -27,6 +29,8 @@ p_IS_alive = True
 p_start = None
 p_attack = False
 power_up = False
+player_pos = []
+most_recent_pos = []
 
 while running:
 
@@ -65,9 +69,18 @@ while running:
 
     setting
       
+    if not b_attack:
 
+        (x,_) = player.getPosition() 
+        pos_tens = torch.tensor([x])
+        player_pos.append(pos_tens) 
+
+    else:
+
+        most_recent_pos = player_pos[-21:]
+        player_pos = []
     
-    boss.drawBoss(setting, b_attack)
+    boss.drawBoss(setting, b_attack, most_recent_pos)
     player.updatePosition(move, right)
     p_IS_alive, b_IS_alive = b_attacks.updateAll(setting, boss, player)
     player.drawPlayer(setting, p_attack, p_power)
@@ -80,7 +93,7 @@ while running:
     if not p_IS_alive or not b_IS_alive:
 
         running = False
-    
+  
     
     b_attack = False
     p_attack = False
