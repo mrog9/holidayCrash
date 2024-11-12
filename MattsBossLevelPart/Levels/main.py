@@ -73,7 +73,7 @@ while running:
     player.drawPlayer(setting, p_attack, p_power)
 
     if power_up:
-        p_power += .0001
+        p_power += .0002
     else:
         p_power = 0
 

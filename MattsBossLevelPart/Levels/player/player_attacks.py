@@ -14,7 +14,7 @@ class PlayerAttacks(pygame.sprite.Sprite):
         self.floatX = 0.0
         self.y = 440
         self.floatY = 440.0
-        self.velX = 0.08
+        self.velX = 0.09
         self.velY = 0
         self.accel = .0001
         # self.pow = 0

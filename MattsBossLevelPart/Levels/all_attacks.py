@@ -35,7 +35,7 @@ class AllAttacks:
 
                 x,y = sprite.getAttackPosition()
 
-                if (x <= px+25) and (x>=px-25):
+                if (x <= px+100) and (x>=px):
 
                     if y >= 400 and y<=450:
 
@@ -54,9 +54,9 @@ class AllAttacks:
 
                 x,y = sprite.getAttackPosition()
 
-                if (x <= bx+25) and (x>=bx-25):
+                if (x <= bx+100) and (x>=bx):
 
-                    if y >= 400 and y<=450:
+                    if y >= by-10 and y<=by+100:
 
                         sprite.endAttack(setting)
                         self.player_sprite_group.remove(sprite)

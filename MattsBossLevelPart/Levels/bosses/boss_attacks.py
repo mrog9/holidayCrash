@@ -22,7 +22,7 @@ class BossAttacks(pygame.sprite.Sprite):
     def initializeAttack(self,setting, pred_quad):
         
         rand_int = random.randint(0,3)
-        rand_list = [self.velY_list[rand_int] - 0.01*i for i in range(11)]
+        rand_list = [self.velY_list[rand_int] + 0.01*i for i in range(11)]
         rand_int = random.randint(0,10)
         self.velY = rand_list[rand_int]
 
