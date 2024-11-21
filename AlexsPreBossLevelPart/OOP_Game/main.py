@@ -1,0 +1,136 @@
+import pygame
+from sprites import *
+from config import *
+import sys
+
+class Game:
+	def __init__(self):
+		pygame.init()
+		self.screen = pygame.display.set_mode((WIN_WIDTH, WIN_HEIGHT))
+		self.clock = pygame.time.Clock()
+		
+		self.font = pygame.font.Font('AlexsPreBossLevelPart/OOP_Game/Arial.ttf', 32)
+
+		self.character_spritesheet = Spritesheet('AlexsPreBossLevelPart/OOP_Game/img/Char_Sheet.png', 5, 3, 32, [3,3,3,3,3], 4)
+		self.wall_spritesheet = Spritesheet('AlexsPreBossLevelPart/OOP_Game/img/Halloween_Wall_Sheet.png', 4, 4, 32, [4,4,4,4], 0)
+		self.enemy_spritesheet = Spritesheet('AlexsPreBossLevelPart/OOP_Game/img/Halloween_Enemy_sheet.png', 7, 6, 32, [4, 9, 6, 7, 5, 5, 5], 4)
+
+		self.intro_background = pygame.image.load('AlexsPreBossLevelPart/OOP_Game/img/background_image.png')
+		self.running = True
+		self.level = 0
+
+	def create_tile_map(self, tile_map, floor, offset):
+		for i, row in enumerate(tile_map):
+			for j, column in enumerate(row):
+				if column == "B":
+					Block(self, j, i, 'BOTTOM', offset)
+				if column == "U":
+					Block(self, j, i, 'UPPERLEFT', offset)
+				if column == "T":
+					Block(self, j, i, 'TOP', offset)
+				if column == "C":
+					Block(self, j, i, 'UPPERRIGHT', offset)
+				if column == "R":
+					Block(self, j, i, 'RIGHT', offset)
+				if column == "L":
+					Block(self, j, i, 'LEFT', offset)
+				if column == "M":
+					Block(self, j, i, 'LOWERLEFT', offset)
+				if column == "F":
+					Block(self, j, i, 'LOWERRIGHT', offset)
+				if column == "W":
+					Block(self, j, i, 'WALL', offset)
+				if column == "E":
+					Enemy(self, j, i, offset)
+				if column == "S":
+					Stairs(self, j, i, offset, floor)
+				if column == "G":
+					Gates(self, j, i, offset)
+
+		if(self.players.sprites()):
+			pass
+		else:			
+			Player(self, 6, 4)
+
+	def new(self):
+		# Start a new game
+		self.playing = True
+
+		# Sprite Groupings
+		self.all_sprites = pygame.sprite.LayeredUpdates()
+		self.players = pygame.sprite.LayeredUpdates()
+		self.blocks = pygame.sprite.LayeredUpdates()
+		self.enemies = pygame.sprite.LayeredUpdates()
+		self.attacks = pygame.sprite.LayeredUpdates()
+		self.stairs = pygame.sprite.LayeredUpdates()
+		self.gates = pygame.sprite.LayeredUpdates()
+
+		self.create_tile_map(LEVELS[0][0], 0, (0,0))
+
+
+	def events(self):
+		# game loop events
+		for event in pygame.event.get():
+			if event.type == pygame.QUIT:
+				self.playing = False
+				self.running = False		
+
+	def updates(self):
+		# game loop updates
+		self.all_sprites.update()
+		pygame.display.flip()
+
+	def draw(self):
+		self.screen.fill(BLACK)
+		self.all_sprites.draw(self.screen)
+		self.clock.tick(FPS)
+		pygame.display.update()
+
+	def main(self):
+		# Game Loop
+		while self.playing:
+			self.events()
+			self.updates()
+			self.draw()
+
+		self.running = False
+
+	def game_over(self):
+		pass
+
+	def intro_screen(self):
+		intro = True
+
+		title = self.font.render('Holiday Crash', True, BLACK)
+		title_rect = title.get_rect(x=WIN_WIDTH/2-50, y=WIN_HEIGHT/2-10)
+		play_button = Button(WIN_WIDTH/2-40, WIN_HEIGHT/2+30, 100, 50, WHITE, BLACK, 'Play', 32)
+
+		while intro:
+			for event in pygame.event.get():
+				if event.type == pygame.QUIT:
+					intro = False
+					self.running = False
+
+			mouse_pos = pygame.mouse.get_pos()
+			mouse_pressed = pygame.mouse.get_pressed()
+
+			if play_button.is_pressed(mouse_pos, mouse_pressed):
+				intro = False
+
+			self.screen.blit(pygame.transform.scale(self.intro_background, (WIN_WIDTH, WIN_HEIGHT)), (0,0))
+			self.screen.blit(title, title_rect)
+			self.screen.blit(play_button.image, play_button.rect)
+			self.clock.tick(FPS)
+			pygame.display.update()
+
+g = Game()
+g.intro_screen()
+g.new()
+
+while g.running:
+	g.main()
+	g.game_over()
+
+pygame.quit()
+sys.exit()
+
