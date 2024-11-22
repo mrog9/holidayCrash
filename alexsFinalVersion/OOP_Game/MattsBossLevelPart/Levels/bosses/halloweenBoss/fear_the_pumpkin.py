@@ -1,4 +1,4 @@
-from abstract.boss import Boss
+from MattsBossLevelPart.Levels.abstract.boss import Boss
 import pygame
 import torch
 from .boss_attacks import BossAttacks
@@ -13,7 +13,7 @@ class FearThePumpkin(Boss):
         self.all_attacks = []
         self.p_surface = pygame.Surface((250, 30))
         self.p_surface.fill((255,165,0))
-        self.image = pygame.image.load("MattsBossLevelPart/Levels/bosses/halloweenBoss/pumpkin.png")
+        self.image = pygame.image.load("alexsFinalVersion/OOP_Game/MattsBossLevelPart/Levels/bosses/halloweenBoss/pumpkin.png")
         self.scaled_img = pygame.transform.scale(self.image, (80,80))
         self.damage = 0
         self.nnModel =  PumpkinNN(20, 4)

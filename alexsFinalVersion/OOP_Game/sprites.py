@@ -111,7 +111,7 @@ class Player(pygame.sprite.Sprite):
 		self.rect.x = self.x
 		self.rect.y = self.y
 
-		self.char_step = 0;
+		self.char_step = 0
 		self.set_length = 2
 		self.last = pygame.time.get_ticks()
 		self.hit = 10
@@ -144,7 +144,7 @@ class Player(pygame.sprite.Sprite):
 		gate_collision = pygame.sprite.spritecollide(self, self.game.gates, False)
 
 		if gate_collision:
-			gate_collision[0].traverse()
+			self.game = gate_collision[0].traverse()
 
 		for sprite in self.game.all_sprites:
 			sprite.rect.x -= self.dx
@@ -335,15 +335,21 @@ class Gates(pygame.sprite.Sprite):
 			g.remove(self.game.gates)
 			g.kill()
 
-		if self.game.level == 0:
-			self.game.wall_spritesheet = Spritesheet('alexsFinalVersion/OOP_Game/img/Thanksgiving_Wall_Sheet.png', 4, 4, 32, [4,4,4,4], 0)
-			self.game.enemy_spritesheet = Spritesheet('alexsFinalVersion/OOP_Game/img/Thanksgiving_Enemy_Sheet.png', 6, 5, 32, [4, 3, 4, 4, 5, 5, 5], 4)
-		if self.game.level == 1:
-			self.game.wall_spritesheet = Spritesheet('alexsFinalVersion/OOP_Game/img/Christmas_Wall_Sheet.png', 4, 4, 32, [4,4,4,4], 0)
-			self.game.enemy_spritesheet = Spritesheet('alexsFinalVersion/OOP_Game/img/Christmas_Enemy_Sheet.png', 6, 5, 32, [4, 4, 5, 5, 4, 4, 4], 4)
-		if self.game.level == 2:
-			self.game.playing = False
-			return
+		self.game.playing = False
+
+		# if self.game.level == 0:
+		# 	pygame.quit()
+		# 	runHalloween()
+		# 	self.game = Game(
+		# 		Spritesheet('alexsFinalVersion/OOP_Game/img/Thanksgiving_Wall_Sheet.png', 4, 4, 32, [4,4,4,4], 0),
+		# 		Spritesheet('alexsFinalVersion/OOP_Game/img/Thanksgiving_Enemy_Sheet.png', 6, 5, 32, [4, 3, 4, 4, 5, 5, 5], 4)
+		# 	)
+		# if self.game.level == 1:
+		# 	self.game.wall_spritesheet = Spritesheet('alexsFinalVersion/OOP_Game/img/Christmas_Wall_Sheet.png', 4, 4, 32, [4,4,4,4], 0)
+		# 	self.game.enemy_spritesheet = Spritesheet('alexsFinalVersion/OOP_Game/img/Christmas_Enemy_Sheet.png', 6, 5, 32, [4, 4, 5, 5, 4, 4, 4], 4)
+		# if self.game.level == 2:
+		# 	self.game.playing = False
+		# 	return
 
 
 		if not self.game.isIncremented:
@@ -351,6 +357,8 @@ class Gates(pygame.sprite.Sprite):
 			self.game.level += 1
 			self.game.create_tile_map(LEVELS[self.game.level][0], 0, (0,0), True)
 		self.game.isIncremented = False
+
+		return self.game
 
 
 class Block(pygame.sprite.Sprite):
@@ -421,7 +429,7 @@ class Enemy(pygame.sprite.Sprite):
 		self.rect.x = self.x
 		self.rect.y = self.y
 
-		self.char_step = 0;
+		self.char_step = 0
 		self.set_length = 2
 		self.last = pygame.time.get_ticks()
 		self.prior_interval = pygame.time.get_ticks()

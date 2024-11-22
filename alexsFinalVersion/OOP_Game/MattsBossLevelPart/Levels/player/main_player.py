@@ -1,4 +1,4 @@
-from abstract.player import Player
+from MattsBossLevelPart.Levels.abstract.player import Player
 from .player_attacks import PlayerAttacks
 import pygame
 import math
@@ -15,7 +15,7 @@ class MainPlayer(Player):
         self.float_x = 50.0
         self.p_surface = pygame.Surface((250, 30))
         self.p_surface.fill((200,200,200))
-        self.image = pygame.image.load("MattsBossLevelPart/Levels/player/owl.png")
+        self.image = pygame.image.load("alexsFinalVersion/OOP_Game/MattsBossLevelPart/Levels/player/owl.png")
         self.scaled_img = pygame.transform.scale(self.image, (60,60))
         self.damage = 0
         self.all_attacks=[]

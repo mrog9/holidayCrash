@@ -1,7 +1,7 @@
-from abstract.holiday_level import HolidayLevel
-from settings.pumpkin_patch import PumpkinPatch
-from player.main_player import MainPlayer
-from bosses.halloweenBoss.fear_the_pumpkin import FearThePumpkin
+from MattsBossLevelPart.Levels.abstract.holiday_level import HolidayLevel
+from MattsBossLevelPart.Levels.settings.pumpkin_patch import PumpkinPatch
+from MattsBossLevelPart.Levels.player.main_player import MainPlayer
+from MattsBossLevelPart.Levels.bosses.halloweenBoss.fear_the_pumpkin import FearThePumpkin
 
 class Halloween(HolidayLevel):
 

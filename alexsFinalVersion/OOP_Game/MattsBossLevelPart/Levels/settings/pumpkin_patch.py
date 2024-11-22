@@ -1,4 +1,4 @@
-from abstract.setting import Setting
+from MattsBossLevelPart.Levels.abstract.setting import Setting
 import pygame
 
 class PumpkinPatch(Setting):
@@ -11,7 +11,7 @@ class PumpkinPatch(Setting):
         self.surface.fill((255,165,0))
 
         pygame.init()
-        pygame.mixer.music.load('MattsBossLevelPart/Levels/settings/lofiMusic.mp3')
+        pygame.mixer.music.load('alexsFinalVersion/OOP_Game/MattsBossLevelPart/Levels/settings/lofiMusic.mp3')
         pygame.mixer.music.play(-1)
 
     def getSetting(self):

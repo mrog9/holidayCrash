@@ -1,7 +1,7 @@
 import pygame
 import sys
-from holidays.halloween import Halloween
-from bosses.halloweenBoss.pumpkin_nn import PumpkinNN
+from MattsBossLevelPart.Levels.holidays.halloween import Halloween
+from MattsBossLevelPart.Levels.bosses.halloweenBoss.pumpkin_nn import PumpkinNN
 import random
 from datetime import datetime
 from .halloween_attacks import HalloweenAttacks
@@ -144,4 +144,4 @@ def runHalloween():
 
 
     pygame.quit()
-    sys.exit()
+    # sys.exit()

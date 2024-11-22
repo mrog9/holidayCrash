@@ -1,6 +1,6 @@
-from bosses.halloweenBoss.fear_the_pumpkin import FearThePumpkin
-from bosses.halloweenBoss.boss_attacks import BossAttacks
-from player.main_player import MainPlayer
+from MattsBossLevelPart.Levels.bosses.halloweenBoss.fear_the_pumpkin import FearThePumpkin
+from MattsBossLevelPart.Levels.bosses.halloweenBoss.boss_attacks import BossAttacks
+from MattsBossLevelPart.Levels.player.main_player import MainPlayer
 import pygame
 
 class HalloweenAttacks:

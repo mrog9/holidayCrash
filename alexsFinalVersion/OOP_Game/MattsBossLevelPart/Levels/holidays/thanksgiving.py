@@ -1,4 +1,4 @@
-from abstract.holiday_level import HolidayLevel
+from MattsBossLevelPart.Levels.abstract.holiday_level import HolidayLevel
 
 class Thanksgiving(HolidayLevel):
 
