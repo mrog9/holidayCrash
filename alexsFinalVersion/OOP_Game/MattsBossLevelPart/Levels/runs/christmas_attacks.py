@@ -1,9 +1,9 @@
-from MattsBossLevelPart.Levels.bosses.halloweenBoss.fear_the_pumpkin import FearThePumpkin
-from MattsBossLevelPart.Levels.bosses.halloweenBoss.boss_attacks import BossAttacks
+from MattsBossLevelPart.Levels.bosses.christmasBoss.sinister_snowman import SinisterSnowman
+from MattsBossLevelPart.Levels.bosses.christmasBoss.boss_attacks import BossAttacks
 from MattsBossLevelPart.Levels.player.main_player import MainPlayer
 import pygame
 
-class HalloweenAttacks:
+class ChristmasAttacks:
 
     def __init__(self):
           
@@ -44,7 +44,7 @@ class HalloweenAttacks:
                         del sprite
 
                         p_IS_alive = player.reduceHealth()
-                        player.score -= 2
+                        player.score -= 8
 
         if len(self.player_sprite_group)> 0:
 
@@ -64,8 +64,7 @@ class HalloweenAttacks:
                         del sprite
 
                         b_IS_alive = boss.reduceHealth()
-                        player.score += 3
-
+                        player.score += 17
 
             
         self.boss_sprite_group.update(setting)

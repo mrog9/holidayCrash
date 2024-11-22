@@ -5,7 +5,7 @@ import math
 
 class MainPlayer(Player):
 
-    def __init__(self):
+    def __init__(self, score):
 
         self.pos_x = 24
         self.pos_y = 440
@@ -19,6 +19,7 @@ class MainPlayer(Player):
         self.scaled_img = pygame.transform.scale(self.image, (60,60))
         self.damage = 0
         self.all_attacks=[]
+        self.score = score
         
     def getPosition(self):
 

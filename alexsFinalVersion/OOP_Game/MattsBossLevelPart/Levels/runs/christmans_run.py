@@ -1,18 +1,18 @@
 import pygame
 import sys
-from MattsBossLevelPart.Levels.holidays.halloween import Halloween
-from MattsBossLevelPart.Levels.bosses.halloweenBoss.pumpkin_nn import PumpkinNN
+from MattsBossLevelPart.Levels.holidays.christmas import Christmas
+from MattsBossLevelPart.Levels.bosses.christmasBoss.snowman_nn import SnowmanNN
 import random
 from datetime import datetime
-from .halloween_attacks import HalloweenAttacks
+from .christmas_attacks import ChristmasAttacks
 import torch
 
-def runHalloween(score):
+def runChristmas(score):
     
     running = True
 
-    h_obj = Halloween()
-    attacks = HalloweenAttacks()
+    h_obj = Christmas()
+    attacks = ChristmasAttacks()
 
     setting =h_obj.createSetting()
     player = h_obj.createPlayer(score)
@@ -26,7 +26,7 @@ def runHalloween(score):
     p_power = 0.0
     b_attack = False
     b_IS_alive = True
-    boss_upload_time = float(random.randint(2,5))
+    boss_upload_time = float(random.randint(2,5)/3)
     p_IS_alive = True
     p_start = None
     p_attack = False

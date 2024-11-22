@@ -14,8 +14,8 @@ class Halloween(HolidayLevel):
 
         return boss_obj
 
-    def createPlayer(self):
-        player_obj = MainPlayer()
+    def createPlayer(self, score):
+        player_obj = MainPlayer(score)
 
         return player_obj
 

@@ -5,7 +5,7 @@ import sys
 
 class Game:
 
-	def __init__(self):
+	def __init__(self, score):
 		
 		pygame.init()
 
@@ -24,6 +24,7 @@ class Game:
 		self.level = 0
 		self.isIncremented = False
 		self.winning = True
+		self.game_score = score
 
 	def set_ss(self, wall_ss, enemy_ss):
 
@@ -89,6 +90,8 @@ class Game:
 
 		self.create_tile_map(LEVELS[0][0], 0, (0,0), False)
 
+		self.players.sprites()[0].score = self.game_score
+
 	def events(self):
 		# game loop events
 		for event in pygame.event.get():
@@ -122,9 +125,12 @@ class Game:
 	def main(self):
 		# Game Loop
 		while self.playing:
+			self.game_score = self.players.sprites()[0].score
 			self.events()
 			self.updates()
 			self.draw()
+
+		return self.game_score
 
 	def game_over(self):
 		gg = True
